@@ -29,7 +29,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.1.0-69622"
+      "version": "11.1.0-69950"
     },
     {
       "type": "datasource",
@@ -118,7 +118,7 @@
         "content": "## Snowpark Metrics Dashboard\n\nThis dashboard visualizes Snowpark-related metrics in the Snowflake Event Table. \nMany operations require the queryer to have the `ACCOUNTADMIN` role.\n\nTo do this securely, you can create a new grafana datasource that has a user with the `ACCOUNTADMIN` role, and select that datasource in the variables above.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -165,7 +165,7 @@
         "content": "Select the `Database` and `Schema` variables to view the active functions and procedures.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -222,7 +222,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -281,7 +281,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -349,7 +349,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -398,7 +398,7 @@
         "content": "Fill in the `Function Name` variable to view Memory and CPU metrics for this function or procedure.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69622",
+      "pluginVersion": "11.1.0-69950",
       "targets": [
         {
           "datasource": {
@@ -458,7 +458,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -496,7 +497,7 @@
             "uid": "${DS_SNOWFLAKE}"
           },
           "format": 0,
-          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as memory_usage_bytes\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp,\n    CASE \n      WHEN record['value_type'] = 'INT' THEN value::INT\n      WHEN record['value_type'] = 'DOUBLE' THEN value::DOUBLE\n    END as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${memory_usage}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;",
+          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as memory_usage_bytes\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp,\n    value::INT as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${memory_usage}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;",
           "refId": "A"
         }
       ],
@@ -546,13 +547,12 @@
             }
           },
           "mappings": [],
-          "max": 1,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -590,7 +590,7 @@
             "uid": "${DS_SNOWFLAKE}"
           },
           "format": 0,
-          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as CPU_UTIL_PCT\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp,\n    CASE \n      WHEN record['value_type'] = 'INT' THEN value::INT\n      WHEN record['value_type'] = 'DOUBLE' THEN value::DOUBLE\n    END as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${cpu_util}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;\n  ",
+          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as CPU_UTIL_PCT\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp, \n    value::DOUBLE as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${cpu_util}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;\n  ",
           "refId": "A"
         }
       ],
@@ -784,6 +784,6 @@
   "timezone": "",
   "title": "Snowpark Metrics Dashboard",
   "uid": "fdivgoharm0owc",
-  "version": 67,
+  "version": 68,
   "weekStart": ""
 }
