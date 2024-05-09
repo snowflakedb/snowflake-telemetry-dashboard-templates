@@ -1,0 +1,789 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_MICHELIN-SNOWFLAKE-DATASOURCE",
+      "label": "michelin-snowflake-datasource",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "michelin-snowflake-datasource",
+      "pluginName": "Snowflake"
+    },
+    {
+      "name": "VAR_MEMORY_USAGE",
+      "type": "constant",
+      "label": "memory_usage",
+      "value": "process.memory.usage",
+      "description": ""
+    },
+    {
+      "name": "VAR_CPU_UTIL",
+      "type": "constant",
+      "label": "Process CPU utilization",
+      "value": "process.cpu.utilization",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.1.0-69950"
+    },
+    {
+      "type": "datasource",
+      "id": "grafana-snowflake-datasource",
+      "name": "Snowflake",
+      "version": "1.7.1"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": false,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
+        "name": "Annotations & Alerts",
+        "showIn": 0,
+        "target": {
+          "format": 0,
+          "rawSql": "",
+          "refId": "Anno"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 22,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "## Snowpark Metrics Dashboard\n\nThis dashboard visualizes Snowpark-related metrics in the Snowflake Event Table. \nMany operations require the queryer to have the `ACCOUNTADMIN` role.\n\nTo do this securely, you can create a new grafana datasource that has a user with the `ACCOUNTADMIN` role, and select that datasource in the variables above.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+          },
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 29,
+      "panels": [],
+      "title": "Functions and Procedures",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 38,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Select the `Database` and `Schema` variables to view the active functions and procedures.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+          },
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "$datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 7
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "${DS_SNOWFLAKE}"
+          },
+          "format": 1,
+          "rawSql": "SELECT\n    count(DISTINCT FUNCTION_NAME)\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.FUNCTIONS\nWHERE TRUE \n  AND DELETED IS NULL\n  AND FUNCTION_CATALOG = '${database}';",
+          "refId": "A"
+        }
+      ],
+      "title": "Functions",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "$datasource"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 4,
+        "y": 7
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "${DS_SNOWFLAKE}"
+          },
+          "format": 1,
+          "rawSql": "SELECT\n    count(DISTINCT PROCEDURE_NAME)\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.PROCEDURES\nWHERE TRUE \n  AND DELETED IS NULL\n  AND PROCEDURE_CATALOG = '${database}';",
+          "refId": "A"
+        }
+      ],
+      "title": "Procedures",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "$datasource"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 27,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "${DS_SNOWFLAKE}"
+          },
+          "format": 1,
+          "rawSql": "SELECT DISTINCT\n    'PROCEDURE' as  type, PROCEDURE_NAME as name, PROCEDURE_LANGUAGE as language, RUNTIME_VERSION, LAST_ALTERED\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.PROCEDURES\nWHERE TRUE \n  AND DELETED IS NULL\n  AND PROCEDURE_CATALOG = '${database}'\n  AND PROCEDURE_SCHEMA = '${schema}'\n  AND PROCEDURE_LANGUAGE in ('PYTHON', 'JAVA', 'JAVASCRIPT')\nUNION\nSELECT\n    DISTINCT 'FUNCTION' as  type, FUNCTION_NAME as name, FUNCTION_LANGUAGE as language, RUNTIME_VERSION, LAST_ALTERED\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.FUNCTIONS\nWHERE TRUE \n  AND DELETED IS NULL\n  AND FUNCTION_CATALOG = '${database}'\n  AND FUNCTION_SCHEMA = '${schema}'\n  AND FUNCTION_LANGUAGE in ('PYTHON', 'JAVA', 'JAVASCRIPT')\nORDER BY 1, 2;",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Functions and Procedures",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 37,
+      "panels": [],
+      "title": "Resource Usage Metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 35,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Fill in the `Function Name` variable to view Memory and CPU metrics for this function or procedure.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-SNOWPARKTEST1-PROM}"
+          },
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "${DS_SNOWFLAKE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 33,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "${DS_SNOWFLAKE}"
+          },
+          "format": 0,
+          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as memory_usage_bytes\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp,\n    value::INT as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${memory_usage}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;",
+          "refId": "A"
+        }
+      ],
+      "title": "Function Memory Usage ",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-snowflake-datasource",
+        "uid": "${DS_SNOWFLAKE}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 34,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-snowflake-datasource",
+            "uid": "${DS_SNOWFLAKE}"
+          },
+          "format": 0,
+          "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as CPU_UTIL_PCT\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp, \n    value::DOUBLE as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${cpu_util}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;\n  ",
+          "refId": "A"
+        }
+      ],
+      "title": "Function CPU Utilization",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "snowflake",
+          "value": "fdivgdacfs9vka"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "grafana-snowflake-datasource",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_SNOWFLAKE}"
+        },
+        "definition": "snowflake Query :  show parameters like 'event_table' in account;",
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "show_event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "show parameters like 'event_table' in account;"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_SNOWFLAKE}"
+        },
+        "definition": "snowflake Query :  SELECT \"value\" \nFROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))\nwhere '${show_event_table}' is not null;\n",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Active Event Table",
+        "multi": false,
+        "name": "event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "SELECT \"value\" \nFROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))\nwhere '${show_event_table}' is not null;\n"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 2,
+        "name": "memory_usage",
+        "query": "${VAR_MEMORY_USAGE}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MEMORY_USAGE}",
+          "text": "${VAR_MEMORY_USAGE}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MEMORY_USAGE}",
+            "text": "${VAR_MEMORY_USAGE}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "label": "Process CPU utilization",
+        "name": "cpu_util",
+        "query": "${VAR_CPU_UTIL}",
+        "skipUrlSync": false,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_CPU_UTIL}",
+          "text": "${VAR_CPU_UTIL}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_CPU_UTIL}",
+            "text": "${VAR_CPU_UTIL}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_SNOWFLAKE}"
+        },
+        "definition": "snowflake Query :  select distinct database_name from snowflake.account_usage.databases where DELETED is null;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Database",
+        "multi": false,
+        "name": "database",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "select distinct database_name from snowflake.account_usage.databases where DELETED is null;"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_SNOWFLAKE}"
+        },
+        "definition": "snowflake Query :  select schema_name from snowflake.account_usage.schemata \nwhere deleted is null\nand catalog_name = '${database}';",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Schema",
+        "multi": false,
+        "name": "schema",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "select schema_name from snowflake.account_usage.schemata \nwhere deleted is null\nand catalog_name = '${database}';"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "my_function",
+          "value": "my_function"
+        },
+        "hide": 0,
+        "label": "Function",
+        "name": "function",
+        "options": [
+          {
+            "selected": true,
+            "text": "my_function",
+            "value": "my_function"
+          }
+        ],
+        "query": "my_function",
+        "skipUrlSync": false,
+        "type": "textbox"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "Snowpark Metrics Dashboard",
+  "uid": "fdivgoharm0owc",
+  "version": 68,
+  "weekStart": ""
+}
