@@ -15,13 +15,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "11.0.0-67746"
+      "version": "11.1.0-70903"
     },
     {
       "type": "datasource",
       "id": "grafana-snowflake-datasource",
       "name": "Snowflake",
-      "version": "1.8.1"
+      "version": "1.7.1"
     },
     {
       "type": "panel",
@@ -235,7 +235,9 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -243,7 +245,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "targets": [
         {
           "datasource": {
@@ -393,7 +395,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -401,7 +405,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "targets": [
         {
           "datasource": {
@@ -484,13 +488,15 @@
           "countRows": false,
           "enablePagination": false,
           "fields": [],
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "repeat": "severity_sort_user",
       "repeatDirection": "h",
       "targets": [
@@ -547,7 +553,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -555,7 +563,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "targets": [
         {
           "datasource": {
@@ -637,12 +645,14 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "repeatDirection": "h",
       "targets": [
         {
@@ -673,8 +683,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -698,7 +707,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -706,7 +717,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "targets": [
         {
           "datasource": {
@@ -747,8 +758,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -787,12 +797,14 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true
       },
-      "pluginVersion": "11.0.0-67746",
+      "pluginVersion": "11.1.0-70903",
       "repeat": "severity_sort_executable",
       "repeatDirection": "h",
       "targets": [
@@ -816,25 +828,49 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
-          "value": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table"
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
         },
-        "description": "The name of the Event Table to query telemetry information from.",
-        "hide": 0,
-        "label": "Event Table",
-        "name": "event_table",
-        "options": [
-          {
-            "selected": true,
-            "text": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
-            "value": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table"
-          }
-        ],
-        "query": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
+        "definition": "grafana-snowflake-datasource Query :  show parameters like 'event_table' in account;\n",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "show_event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "show parameters like 'event_table' in account;\n"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "textbox"
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        },
+        "definition": "grafana-snowflake-datasource Query :  select \"value\" \nfrom table(result_scan(last_query_id()))\n--where '${show_event_table}' is not null;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "active_event_table",
+        "multi": false,
+        "name": "event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "select \"value\" \nfrom table(result_scan(last_query_id()))\n--where '${show_event_table}' is not null;"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       },
       {
         "current": {
@@ -952,7 +988,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "HOUR",
           "value": "HOUR"
         },
@@ -1007,8 +1043,8 @@
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Logs Dashboard",
-  "uid": "431d22e3d526",
-  "version": 21,
+  "title": "Logs v2",
+  "uid": "431d22e3d5262",
+  "version": 5,
   "weekStart": ""
 }
