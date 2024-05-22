@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_GRAFANA-SNOWFLAKE-DATASOURCE",
+      "name": "DS_GRAFANA_SNOWFLAKE_DATASOURCE",
       "label": "grafana-snowflake-datasource",
       "description": "",
       "type": "datasource",
@@ -212,9 +212,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -227,7 +225,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_SNOWFLAKE}"
+            "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
           },
           "format": 1,
           "rawSql": "SELECT\n    count(DISTINCT FUNCTION_NAME)\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.FUNCTIONS\nWHERE TRUE \n  AND DELETED IS NULL\n  AND FUNCTION_CATALOG = '${database}';",
@@ -271,9 +269,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": ["mean"],
           "fields": "",
           "values": false
         },
@@ -286,7 +282,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_SNOWFLAKE}"
+            "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
           },
           "format": 1,
           "rawSql": "SELECT\n    count(DISTINCT PROCEDURE_NAME)\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.PROCEDURES\nWHERE TRUE \n  AND DELETED IS NULL\n  AND PROCEDURE_CATALOG = '${database}';",
@@ -342,9 +338,7 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": [
-            "sum"
-          ],
+          "reducer": ["sum"],
           "show": false
         },
         "showHeader": true
@@ -354,7 +348,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_SNOWFLAKE}"
+            "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
           },
           "format": 1,
           "rawSql": "SELECT DISTINCT\n    'PROCEDURE' as  type, PROCEDURE_NAME as name, PROCEDURE_LANGUAGE as language, RUNTIME_VERSION, LAST_ALTERED\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.PROCEDURES\nWHERE TRUE \n  AND DELETED IS NULL\n  AND PROCEDURE_CATALOG = '${database}'\n  AND PROCEDURE_SCHEMA = '${schema}'\n  AND PROCEDURE_LANGUAGE in ('PYTHON', 'JAVA', 'JAVASCRIPT')\nUNION\nSELECT\n    DISTINCT 'FUNCTION' as  type, FUNCTION_NAME as name, FUNCTION_LANGUAGE as language, RUNTIME_VERSION, LAST_ALTERED\nFROM\n    SNOWFLAKE.ACCOUNT_USAGE.FUNCTIONS\nWHERE TRUE \n  AND DELETED IS NULL\n  AND FUNCTION_CATALOG = '${database}'\n  AND FUNCTION_SCHEMA = '${schema}'\n  AND FUNCTION_LANGUAGE in ('PYTHON', 'JAVA', 'JAVASCRIPT')\nORDER BY 1, 2;",
@@ -414,7 +408,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_SNOWFLAKE}"
+        "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -494,7 +488,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_SNOWFLAKE}"
+            "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
           },
           "format": 0,
           "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as memory_usage_bytes\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp,\n    value::INT as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${memory_usage}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;",
@@ -507,7 +501,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_SNOWFLAKE}"
+        "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -587,7 +581,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_SNOWFLAKE}"
+            "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
           },
           "format": 0,
           "rawSql": "select $__timeGroup(timestamp::TIMESTAMP_NTZ, $__interval) as ts, \nmax(value) as CPU_UTIL_PCT\nfrom \n  (\n    SELECT  \n    resource_attributes['snow.executable.name'] as function,\n    timestamp, \n    value::DOUBLE as value\n  FROM ${event_table}\n  WHERE TRUE\n     AND RECORD_TYPE = 'METRIC'\n\t\t AND record['metric']['name'] = '${cpu_util}'\n     AND resource_attributes['snow.database.name'] = '${database}'\n     AND resource_attributes['snow.schema.name'] = '${schema}'\n\t\t AND resource_attributes['snow.executable.name'] ilike '%${function}%'\n\t)\n  group by 1\n  ;\n  ",
@@ -626,7 +620,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_SNOWFLAKE}"
+          "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
         },
         "definition": "snowflake Query :  show parameters like 'event_table' in account;",
         "hide": 2,
@@ -649,7 +643,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_SNOWFLAKE}"
+          "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
         },
         "definition": "snowflake Query :  SELECT \"value\" \nFROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))\nwhere '${show_event_table}' is not null;\n",
         "hide": 0,
@@ -711,7 +705,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_SNOWFLAKE}"
+          "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
         },
         "definition": "snowflake Query :  select distinct database_name from snowflake.account_usage.databases where DELETED is null;",
         "hide": 0,
@@ -734,7 +728,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_SNOWFLAKE}"
+          "uid": "${DS_GRAFANA_SNOWFLAKE_DATASOURCE}"
         },
         "definition": "snowflake Query :  select schema_name from snowflake.account_usage.schemata \nwhere deleted is null\nand catalog_name = '${database}';",
         "hide": 0,
