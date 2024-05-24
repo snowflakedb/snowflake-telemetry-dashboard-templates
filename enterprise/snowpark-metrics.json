@@ -94,7 +94,7 @@
         "content": "## Snowpark Metrics Dashboard\n\nThis dashboard visualizes Snowpark-related metrics in the Snowflake Event Table. \nMany operations require the queryer to have the `ACCOUNTADMIN` role.\n\nTo do this securely, you can create a new grafana datasource that has a user with the `ACCOUNTADMIN` role, and select that datasource in the variables above.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
@@ -141,7 +141,7 @@
         "content": "Select the `Database` and `Schema` variables to view the active functions and procedures.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
@@ -196,7 +196,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
@@ -253,7 +253,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
@@ -319,7 +319,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
@@ -368,7 +368,7 @@
         "content": "Fill in the `Function Name` variable to view Memory and CPU metrics for this function or procedure.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.1.0-69950",
+      "pluginVersion": "9.5.13",
       "targets": [
         {
           "datasource": {
