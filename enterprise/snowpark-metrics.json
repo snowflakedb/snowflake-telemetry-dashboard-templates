@@ -639,23 +639,23 @@
         "type": "query"
       },
       {
-        "hide": 2,
-        "name": "memory_usage",
-        "query": "${VAR_MEMORY_USAGE}",
-        "skipUrlSync": false,
-        "type": "constant",
         "current": {
-          "value": "${VAR_MEMORY_USAGE}",
-          "text": "${VAR_MEMORY_USAGE}",
-          "selected": false
+          "selected": false,
+          "text": "process.memory.usage",
+          "value": "process.memory.usage"
         },
+        "hide": 0,
+        "name": "memory_usage",
         "options": [
           {
-            "value": "${VAR_MEMORY_USAGE}",
-            "text": "${VAR_MEMORY_USAGE}",
-            "selected": false
+            "selected": true,
+            "text": "process.memory.usage",
+            "value": "process.memory.usage"
           }
-        ]
+        ],
+        "query": "process.memory.usage",
+        "skipUrlSync": false,
+        "type": "textbox"
       },
       {
         "hide": 2,
