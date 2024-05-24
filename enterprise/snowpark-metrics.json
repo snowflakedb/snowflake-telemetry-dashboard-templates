@@ -658,24 +658,24 @@
         "type": "textbox"
       },
       {
-        "hide": 2,
+        "current": {
+          "selected": false,
+          "text": "process.cpu.utilization",
+          "value": "process.cpu.utilization"
+        },
+        "hide": 0,
         "label": "Process CPU utilization",
         "name": "cpu_util",
-        "query": "${VAR_CPU_UTIL}",
-        "skipUrlSync": false,
-        "type": "constant",
-        "current": {
-          "value": "${VAR_CPU_UTIL}",
-          "text": "${VAR_CPU_UTIL}",
-          "selected": false
-        },
         "options": [
           {
-            "value": "${VAR_CPU_UTIL}",
-            "text": "${VAR_CPU_UTIL}",
-            "selected": false
+            "selected": true,
+            "text": "process.cpu.utilization",
+            "value": "process.cpu.utilization"
           }
-        ]
+        ],
+        "query": "process.cpu.utilization",
+        "skipUrlSync": false,
+        "type": "textbox"
       },
       {
         "current": {},
