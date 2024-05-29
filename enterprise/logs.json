@@ -818,16 +818,16 @@
         "label": "active_event_table",
         "multi": false,
         "name": "event_table",
-        "options": [
-          {
-            "selected": true,
-            "text": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
-            "value": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table"
-          }
-        ],
-        "query": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "select \"value\" \nfrom table(result_scan(last_query_id()))\n--where '${show_event_table}' is not null;"
+        },
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "textbox"
+        "sort": 0,
+        "type": "query"
       },
       {
         "current": {
