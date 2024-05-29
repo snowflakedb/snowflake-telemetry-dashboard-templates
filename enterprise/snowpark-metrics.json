@@ -112,7 +112,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "$datasource"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -169,7 +169,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "$datasource"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -226,7 +226,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "$datasource"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
