@@ -945,7 +945,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "HOUR",
           "value": "HOUR"
         },
