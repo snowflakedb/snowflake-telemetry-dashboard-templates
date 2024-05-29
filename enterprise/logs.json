@@ -994,8 +994,8 @@
     ]
   },
   "time": {
-    "from": "2024-03-04T21:30:00.500Z",
-    "to": "2024-03-05T11:29:58.500Z"
+    "from": "now-5y",
+    "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
