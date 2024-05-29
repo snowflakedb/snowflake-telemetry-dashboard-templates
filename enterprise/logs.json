@@ -784,6 +784,39 @@
         "skipUrlSync": false,
         "type": "datasource"
       },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${datasource}"
+        },
+        "definition": "grafana-snowflake-datasource Query :  show parameters like 'event_table' in account;\n",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "show_event_table",
+        "options": [],
+        "query": {
+          "format": 1,
+          "rawSql": "show parameters like 'event_table' in account;\n"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "grafana-snowflake-datasource",
+          "uid": "${datasource}"
+        },
+        "definition": "grafana-snowflake-datasource Query :  select \"value\" \nfrom table(result_scan(last_query_id()))\n--where '${show_event_table}' is not null;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "active_event_table",
+        "multi": false,
         "name": "event_table",
         "options": [
           {
