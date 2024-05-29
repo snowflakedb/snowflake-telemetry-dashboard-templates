@@ -37,7 +37,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "",
       "gridPos": {
@@ -62,7 +62,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 2,
           "rawSql": "SELECT TOP ${number_of_logs} TIMESTAMP, CONCAT(RECORD:\"severity_text\", ': ', VALUE) AS LOG, * EXCLUDE (TIMESTAMP, VALUE, RECORD)\n  FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC;",
@@ -75,7 +75,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -199,7 +199,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT COUNT(*) AS \" Number of Logs\" \n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);\n;",
@@ -212,7 +212,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -294,7 +294,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT DATE_TRUNC(${time_series_division:singlequote}, \"TIMESTAMP\") AS \"Time\", COUNT_IF(RECORD:\"severity_text\"='TRACE') AS \"TRACE\", COUNT_IF(RECORD:\"severity_text\"='DEBUG') AS \"DEBUG\", COUNT_IF(RECORD:\"severity_text\"='INFO') AS \"INFO\", COUNT_IF(RECORD:\"severity_text\"='WARN') AS \"WARN\", COUNT_IF(RECORD:\"severity_text\"='ERROR') AS \"ERROR\", COUNT_IF(RECORD:\"severity_text\"='FATAL') AS \"FATAL\"\n\tFROM \n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP ASC)\n\tGROUP BY DATE_TRUNC(${time_series_division:doublequote}, \"TIMESTAMP\")\n\tORDER BY DATE_TRUNC(${time_series_division:doublequote}, \"TIMESTAMP\");",
@@ -307,7 +307,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -357,7 +357,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT COUNT(DISTINCT RESOURCE_ATTRIBUTES:\"db.user\") AS \"Unique DB Users in Logs\"\n  FROM \n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);",
@@ -370,7 +370,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -448,7 +448,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT RESOURCE_ATTRIBUTES:\"db.user\"::string AS \"User\", COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) AS \"Count\"\n  FROM \n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC)\n  GROUP BY RESOURCE_ATTRIBUTES:\"db.user\" \n  ORDER BY COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) DESC;",
@@ -461,7 +461,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -511,7 +511,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT COUNT(DISTINCT RESOURCE_ATTRIBUTES:\"snow.warehouse.name\") AS \"Number of Unique Warehouses in Logs\" \n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);",
@@ -524,7 +524,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -599,7 +599,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT RESOURCE_ATTRIBUTES:\"snow.warehouse.name\"::string AS \"Warehouse Name\", COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) AS \"Count\"\n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC) \n  GROUP BY RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" \n  ORDER BY COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) DESC;",
@@ -612,7 +612,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -662,7 +662,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT COUNT(DISTINCT RESOURCE_ATTRIBUTES:\"snow.executable.name\") AS \"Number of Unique Executable Names in Logs\" \n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);\n",
@@ -675,7 +675,7 @@
     {
       "datasource": {
         "type": "grafana-snowflake-datasource",
-        "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+        "uid": "${datasource}"
       },
       "description": "",
       "fieldConfig": {
@@ -750,7 +750,7 @@
         {
           "datasource": {
             "type": "grafana-snowflake-datasource",
-            "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+            "uid": "${datasource}"
           },
           "format": 0,
           "rawSql": "SELECT RESOURCE_ATTRIBUTES:\"snow.executable.name\"::string AS \"Executable Name\", COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) AS \"Count\"\n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RECORD:\"severity_text\" IN (${severity_levels:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC)\n  GROUP BY RESOURCE_ATTRIBUTES:\"snow.executable.name\" \n  ORDER BY COUNT_IF(RECORD:\"severity_text\" IN (${severity_levels:singlequote})) DESC;",
@@ -769,12 +769,21 @@
       {
         "current": {
           "selected": false,
-          "text": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table",
-          "value": "GRAFANA_TEST_DATABASE.GRAFANA_TEST_EVENT_TABLE.grafana_test_event_table"
+          "text": "",
+          "value": ""
         },
-        "description": "The name of the Event Table to query telemetry information from.",
         "hide": 0,
-        "label": "Event Table",
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "grafana-snowflake-datasource",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
         "name": "event_table",
         "options": [
           {
@@ -812,7 +821,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+          "uid": "${datasource}"
         },
         "definition": "grafana-snowflake-datasource Query : SELECT DISTINCT RESOURCE_ATTRIBUTES:\"db.user\"\n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);\n",
         "hide": 0,
@@ -835,7 +844,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+          "uid": "${datasource}"
         },
         "definition": "grafana-snowflake-datasource Query : SELECT DISTINCT RESOURCE_ATTRIBUTES:\"snow.warehouse.name\"\n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);",
         "hide": 0,
@@ -858,7 +867,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+          "uid": "${datasource}"
         },
         "definition": "grafana-snowflake-datasource Query : SELECT DISTINCT RESOURCE_ATTRIBUTES:\"snow.executable.name\"\n  FROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);\n",
         "hide": 0,
@@ -882,7 +891,7 @@
         "current": {},
         "datasource": {
           "type": "grafana-snowflake-datasource",
-          "uid": "${DS_GRAFANA-SNOWFLAKE-DATASOURCE}"
+          "uid": "${datasource}"
         },
         "definition": "grafana-snowflake-datasource Query : SELECT DISTINCT RECORD:\"severity_text\" AS __value\nFROM\n  (SELECT TOP ${number_of_logs} * FROM ${event_table} \n  WHERE ${event_table}.RECORD_TYPE='LOG'\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"db.user\" IN (${users:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.warehouse.name\" IN (${warehouses:singlequote})\n  AND ${event_table}.RESOURCE_ATTRIBUTES:\"snow.executable.name\" IN (${executables:singlequote})\n  AND ${event_table}.TIMESTAMP BETWEEN ${__from:singlequote} AND ${__to:singlequote}\n  ORDER BY ${event_table}.TIMESTAMP DESC);\n",
         "hide": 0,
